@@ -20,7 +20,7 @@ public class ItemCatController {
     private ItemCatService itemCatService;
 
     /**
-     * 查询类目列表
+     * 查询类目列表aaa
      *
      * @param parentId
      * @return
