@@ -80,7 +80,7 @@ public class ItemController {
      * @return
      */
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(Item item, @RequestParam(value = "desc", required = false) String desc){
+    public ResponseEntity<Void> update(Item item, @RequestParam("desc") String desc){
         try {
             int count = itemService.updateItem(item, desc);
             if (1 != count){
