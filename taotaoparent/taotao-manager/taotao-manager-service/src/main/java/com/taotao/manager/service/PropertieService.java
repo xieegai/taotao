@@ -1,5 +1,6 @@
 package com.taotao.manager.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,9 +10,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class PropertieService {
 
-    public static final String IMAGE_BASE_URL = "http://127.0.0.1/";
+    @Value("${IMAGE_BASE_URL}")
+    public String IMAGE_BASE_URL;
 
-    public static final String REPOSITORY_PATH = "D://upload";
+    @Value("${REPOSITORY_PATH}")
+    public String REPOSITORY_PATH;
 
 
 }

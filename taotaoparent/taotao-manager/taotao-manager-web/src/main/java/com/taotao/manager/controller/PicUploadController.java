@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,7 @@ import java.util.Date;
  * @date 18-11-3 13:48
  */
 @Controller
-@RequestMapping("/pic")
+@RequestMapping("pic")
 public class PicUploadController {
 
     private static final Logger logger = LoggerFactory.getLogger(PicUploadController.class);
@@ -43,7 +44,7 @@ public class PicUploadController {
     private static final String[] IMAGE_TYPE = new String[] {".bmp", ".jpg", ".jpeg", ".gif", ".png"};
 
     @ResponseBody
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @RequestMapping(value = "upload", method = RequestMethod.POST)
     public String upload(@RequestParam("uploadFile")MultipartFile uploadFile, HttpServletResponse response) throws Exception{
 
         // 格式校验

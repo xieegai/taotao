@@ -59,7 +59,7 @@ var TT = TAOTAO = {
     },
     // 初始化图片上传组件
     initPicUpload : function(data){
-    	$(".picFileUpload").each(function(i,e){
+    	$(".picFileUpload").each(function(i,e) {
     		var _ele = $(e);
     		_ele.siblings("div.pics").remove();
     		_ele.after('\
