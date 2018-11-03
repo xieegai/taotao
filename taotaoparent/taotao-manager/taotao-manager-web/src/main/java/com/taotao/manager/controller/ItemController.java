@@ -73,5 +73,26 @@ public class ItemController {
         }
     }
 
+    /**
+     * 编辑商品
+     *
+     * @param item
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.PUT)
+    public ResponseEntity<Void> update(Item item, @RequestParam(value = "desc", required = false) String desc){
+        try {
+            int count = itemService.updateItem(item, desc);
+            if (1 != count){
+                logger.error("编辑商品失败", item);
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            }
+            return ResponseEntity.ok(null);
+        }catch (Exception e){
+            logger.error("编辑商品失败", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
 
 }

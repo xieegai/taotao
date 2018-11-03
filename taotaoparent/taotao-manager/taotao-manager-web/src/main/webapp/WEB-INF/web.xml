@@ -30,14 +30,15 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
-  <!--<filter>
+  <!-- 拦截PUT请求，以便处理参数 -->
+  <filter>
     <filter-name>HttpMethodFilter</filter-name>
     <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>HttpMethodFilter</filter-name>
     <url-pattern>/*</url-pattern>
-  </filter-mapping>-->
+  </filter-mapping>
 
   <!--
       将POST请求转化为DELETE或者是PUT

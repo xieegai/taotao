@@ -43,4 +43,17 @@ public class ItemService extends BaseService<Item>{
 
         return count;
     }
+
+    public int updateItem(Item item, String desc) {
+        // 数据限制，不可修改
+        item.setCreated(null);
+
+        item.setUpdated(new Date());
+
+        int count = 0;
+        count = super.updateSelective(item);
+        count = itemDescService.updateItemDesc(item.getId(), desc);
+
+        return count;
+    }
 }
