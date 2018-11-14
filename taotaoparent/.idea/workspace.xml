@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="784a6787-81cb-41ce-ace4-148408eb0101" name="Default" comment="itemParam" />
+    <list default="true" id="784a6787-81cb-41ce-ace4-148408eb0101" name="Default" comment="itemParam">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/taotao-common/target/" />
     <ignored path="$PROJECT_DIR$/taotao-manager/target/" />
@@ -22,8 +24,8 @@
       <file leaf-file-name="ItemParam.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/taotao-manager/taotao-manager-pojo/src/main/java/com/taotao/manager/pojo/ItemParam.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="47" selection-start-line="47" selection-end-line="47" />
+            <state relative-caret-position="352">
+              <caret line="46" selection-start-line="46" selection-end-line="46" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#507#508#0" expanded="true" />
@@ -92,8 +94,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="216" />
-    <option name="y" value="-20" />
+    <option name="x" value="112" />
+    <option name="y" value="-14" />
     <option name="width" value="1809" />
     <option name="height" value="1002" />
   </component>
@@ -216,7 +218,7 @@
       <option name="presentableId" value="Default" />
       <updated>1541948987712</updated>
       <workItem from="1541948989241" duration="270000" />
-      <workItem from="1542204108633" duration="2288000" />
+      <workItem from="1542204108633" duration="2387000" />
     </task>
     <task id="LOCAL-00001" summary="itemParam">
       <created>1542205447396</created>
@@ -236,10 +238,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2558000" />
+    <option name="totallyTimeSpent" value="2657000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -251,7 +254,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.61566484" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.61566484" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25383994" />
       <window_info id="Web" order="2" side_tool="true" />
@@ -296,8 +299,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/taotao-manager/taotao-manager-pojo/src/main/java/com/taotao/manager/pojo/ItemParam.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="47" selection-start-line="47" selection-end-line="47" />
+        <state relative-caret-position="352">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#507#508#0" expanded="true" />

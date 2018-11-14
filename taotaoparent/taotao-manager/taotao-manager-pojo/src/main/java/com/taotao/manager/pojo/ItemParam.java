@@ -44,6 +44,4 @@ public class ItemParam extends BasePojo{
     public void setParamData(String paramData) {
         this.paramData = paramData;
     }
-
-
 }
