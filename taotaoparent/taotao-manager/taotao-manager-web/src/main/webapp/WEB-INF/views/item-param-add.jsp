@@ -35,7 +35,8 @@
 		</ul>
 	</li>
 </div>
-<script style="text/javascript">
+
+<script tyle="text/javascript">
 	$(function(){
 		TAOTAO.initItemCat({
 			fun:function(node){

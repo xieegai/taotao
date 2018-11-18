@@ -59,9 +59,11 @@ public class ItemController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(Item item, @RequestParam("desc") String desc){
+    public ResponseEntity<Void> save(Item item,
+                                     @RequestParam("desc") String desc,
+                                     @RequestParam("itemParams") String itemParams){
         try {
-            int count = itemService.saveItem(item, desc);
+            int count = itemService.saveItem(item, desc, itemParams);
             if (1 != count){
                 logger.error("保存商品失败", item);
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -80,9 +82,11 @@ public class ItemController {
      * @return
      */
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(Item item, @RequestParam("desc") String desc){
+    public ResponseEntity<Void> update(Item item,
+                                       @RequestParam("desc") String desc,
+                                       @RequestParam("itemParams") String itemParams){
         try {
-            int count = itemService.updateItem(item, desc);
+            int count = itemService.updateItem(item, desc, itemParams);
             if (1 != count){
                 logger.error("编辑商品失败", item);
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

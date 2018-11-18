@@ -9,6 +9,7 @@ import java.util.Date;
 public abstract class BasePojo {
 
     private Date created;
+
     private Date updated;
 
     public Date getCreated() {

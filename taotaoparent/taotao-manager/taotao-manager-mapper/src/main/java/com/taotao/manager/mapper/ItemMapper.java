@@ -11,5 +11,9 @@ import java.util.List;
  */
 public interface ItemMapper extends TaoTaoMapper<Item> {
 
+    /**
+     * 根据更新时间倒叙查询
+     * @return
+     */
     public List<Item> queryItemListOrderByUpdated();
 }

@@ -9,5 +9,6 @@ import com.taotao.manager.pojo.ItemParamItem;
  * @date 2018/11/14 23:11
  */
 public interface ItemParamItemMapper extends TaoTaoMapper<ItemParamItem> {
-    
+
+    int updateItemParemItemByItemId(ItemParamItem itemParamItem);
 }
