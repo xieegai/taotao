@@ -1,5 +1,7 @@
-com\taotao\manager\base\mapper\TaoTaoMapperProvider.class
 com\taotao\manager\base\mapper\TaoTaoMapper.class
 com\taotao\manager\mapper\ItemDescMapper.class
+com\taotao\manager\base\mapper\TaoTaoMapperProvider.class
+com\taotao\manager\mapper\ItemParamMapper.class
+com\taotao\manager\mapper\ItemParamItemMapper.class
 com\taotao\manager\mapper\ItemCatMapper.class
 com\taotao\manager\mapper\ItemMapper.class
