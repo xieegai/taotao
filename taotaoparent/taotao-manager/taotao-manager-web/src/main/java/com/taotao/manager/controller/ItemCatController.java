@@ -1,5 +1,6 @@
 package com.taotao.manager.controller;
 
+import com.taotao.common.bean.ItemCatResult;
 import com.taotao.manager.pojo.ItemCat;
 import com.taotao.manager.service.ItemCatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,15 @@ public class ItemCatController {
     @ResponseBody
     public List<ItemCat> queryItemCatList(@RequestParam(value = "id", defaultValue = "0") Long parentId){
         return itemCatService.queryItemCatList(parentId);
+    }
+
+    /**
+     * 对前台web系统返回多级类目
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "web/all", method = RequestMethod.GET)
+    public ItemCatResult queryItemCatWebAll(){
+        return itemCatService.queryItemCatWebAll();
     }
 }
