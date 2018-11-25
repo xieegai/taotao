@@ -6,22 +6,20 @@
     <script type="text/javascript" src="http://manager.taotao.com/js/jquery-easyui-1.4.1/jquery.min.js"></script>
 
     <script type="text/javascript">
+        alert("aa");
         alert($);
-        /*$(function () {
-            alert("aa");
-            /!*$.ajax({
+        $(function () {
+            $.ajax({
                 url : "http://manager.taotao.com/js/test.json",
-                dataType : "json",
+                dateType : "json",
                 success : function (data) {
                     alert(data.abc);
                 }
-            });*!/
-        })*/
-        function qq(data) {
-            alert(data.abc);
-        }
+            });
+        })
+
     </script>
-    <script type="text/javascript" src="http://manager.taotao.com/test.jsonp.jsp?callback=qq"></script>
+
 </head>
 <body>
 </body>

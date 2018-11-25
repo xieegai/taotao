@@ -9,15 +9,18 @@
 
 	<!-- 注解驱动 -->
 	<mvc:annotation-driven>
+		<!--扩展了MappingJackson2HttpMessageConverter支持了jsonp的跨域请求-->
+		<mvc:message-converters>
+			<bean class="com.taotao.common.spring.extend.converter.CallbackMappingJackson2HttpMessageConverter">
+				<!-- callback:请求参数中的回调参数的方法名;  callbackName:java代码中的属性值-->
+				<property name="callbackName" value="callback"></property>
+			</bean>
+		</mvc:message-converters>
+
 		<!--<mvc:message-converters>
 			&lt;!&ndash; 定义文本转化器 &ndash;&gt;
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
 				<constructor-arg index="0" value="UTF-8"/>
-			</bean>
-			&lt;!&ndash; 扩展了MappingJackson2HttpMessageConverter支持了jsonp的跨域请求 &ndash;&gt;
-			<bean class="com.taotao.common.spring.exetend.converter.json.CallbackMappingJackson2HttpMessageConverter">
-				&lt;!&ndash; 请求参数中的回调参数的方法名 &ndash;&gt;
-				<property name="callbackName" value="callback"/>
 			</bean>
 		</mvc:message-converters>-->
 	</mvc:annotation-driven>
