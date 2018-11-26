@@ -4,10 +4,10 @@ import javax.persistence.*;
 
 /**
  * @author zjj
- * @date 18-10-28 2:19
+ * @date 2018/11/26 23:13
  */
-@Table(name = "tb_item_cat")
-public class ItemCat extends BasePojo {
+@Table(name = "tb_content_category")
+public class ContentCategory extends BasePojo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,5 +82,4 @@ public class ItemCat extends BasePojo {
     public String getState(){
         return getParent() ? "closed" : "open";
     }
-
 }

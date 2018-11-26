@@ -35,16 +35,16 @@ $(function(){
         		});
         	}else{
         		$.ajax({
-        			   type: "PUT",
-        			   url: "/rest/content/category",
-        			   data: {id:node.id,name:node.text},
-        			   success: function(msg){
-        				   //$.messager.alert('提示','新增商品成功!');
-        			   },
-        			   error: function(){
-        				   $.messager.alert('提示','重命名失败!');
-        			   }
-        			});
+                    type: "PUT",
+                    url: "/rest/content/category",
+                    data: {id:node.id,name:node.text},
+                    success: function(msg){
+                       //$.messager.alert('提示','新增商品成功!');
+                    },
+                    error: function(){
+                        $.messager.alert('提示','重命名失败!');
+                    }
+        		});
         	}
         }
 	});
