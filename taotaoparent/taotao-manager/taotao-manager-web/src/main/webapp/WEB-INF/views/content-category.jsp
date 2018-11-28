@@ -69,9 +69,10 @@ function menuHandler(item){
 		$.messager.confirm('确认','确定删除名为 '+node.text+' 的分类吗？',function(r){
 			if(r){
 				$.ajax({
-     			   type: "POST",
-     			   url: "/rest/content/category/123",
-     			   data : {parentId:node.parentId,id:node.id,"_method":"DELETE"},
+     			   type: "DELETE",
+     			   url: "/rest/content/category?parentId="+node.parentId+"&id="+node.id,
+                   // DELETE 请求方式无法通过json传递数据
+                   //data : {parentId:node.parentId,id:node.id},
      			   success: function(msg){
      				   //$.messager.alert('提示','新增商品成功!');
      				  tree.tree("remove",node.target);

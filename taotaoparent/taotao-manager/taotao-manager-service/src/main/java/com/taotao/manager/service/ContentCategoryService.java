@@ -3,7 +3,9 @@ package com.taotao.manager.service;
 import com.taotao.manager.pojo.ContentCategory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author zjj
@@ -31,5 +33,41 @@ public class ContentCategoryService extends BaseService<ContentCategory> {
         }
 
         return result;
+    }
+
+    public int deleteContentCategory(Long parentId, Long id) {
+
+        // 递归删除当前类目及其所有子类目
+        List<Long> ids = new ArrayList<>();
+        ids.add(id);
+        ids = getAllChildren(id, ids);
+        Long[] longs = ids.toArray(new Long[]{});
+        int result = super.deletedByIds(longs);
+
+        // 如果父节点下没有其他子节点，则修改父节点isParent为false
+        ContentCategory param = new ContentCategory();
+        param.setParentId(parentId);
+        List<ContentCategory> others = super.queryList(param);
+        if (null == others || others.isEmpty()){
+            ContentCategory parent = new ContentCategory();
+            parent.setId(parentId);
+            parent.setParent(false);
+            parent.setUpdated(new Date());
+            result = super.updateSelective(parent);
+        }
+
+        return  result;
+    }
+
+    private List<Long> getAllChildren(Long id, List<Long> ids) {
+        ContentCategory param = new ContentCategory();
+        param.setParentId(id);
+        List<ContentCategory> children = super.queryList(param);
+        for (ContentCategory child : children) {
+            ids.add(child.getId());
+            getAllChildren(child.getId(), ids);
+        }
+
+        return ids;
     }
 }
