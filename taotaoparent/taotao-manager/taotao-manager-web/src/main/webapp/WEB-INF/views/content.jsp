@@ -10,7 +10,7 @@
 		    <thead>
 		        <tr>
 		            <th data-options="field:'id',width:30">ID</th>
-		            <th data-options="field:'title',width:120">内容标题</th>
+		            <th data-options="field:'title',width:120">内容标题</th>pagination-info
 		            <th data-options="field:'subTitle',width:100">内容子标题</th>
 		            <th data-options="field:'titleDesc',width:120">内容描述</th>
 		            <th data-options="field:'url',width:60,align:'center',formatter:TAOTAO.formatUrl">内容连接</th>
@@ -94,13 +94,29 @@ var contentListToolbar = [{
     	$.messager.confirm('确认','确定删除ID为 '+ids+' 的内容吗？',function(r){
     	    if (r){
     	    	var params = {"ids":ids};
-            	$.post("/rest/content/delete",params, function(data){
+            	/*$.post("/rest/content/delete",params, function(data){
         			if(data.status == 200){
         				$.messager.alert('提示','删除内容成功!',undefined,function(){
         					$("#contentList").datagrid("reload");
         				});
         			}
-        		});
+        		});*/
+
+                $.ajax({
+                    type: "DELETE",
+                    url: "/rest/content?ids=" + ids,
+                    // DELETE 请求方式无法通过json传递数据
+                    // data: params,
+                    success: function(msg){
+                        $.messager.alert('提示','删除内容成功!',undefined,function(){
+                            $("#contentList").datagrid("reload");
+                        });
+                    },
+                    error: function(){
+                        $.messager.alert('提示','删除失败!');
+                    }
+                });
+
     	    }
     	});
     }
