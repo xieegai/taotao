@@ -2,9 +2,12 @@ package com.taotao.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taotao.common.bean.Constant;
 import com.taotao.common.bean.EasyUIResult;
 import com.taotao.common.service.ApiService;
+import com.taotao.common.service.RedisService;
 import com.taotao.manager.pojo.Content;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,9 @@ public class IndexService {
     @Autowired
     private ApiService apiService;
 
+    @Autowired
+    private RedisService redisService;
+
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     @Value("${TAOTAO_MANAGER_URL}")
@@ -41,6 +47,16 @@ public class IndexService {
      * @return
      */
     public String getBigAd() {
+        String result = null;
+
+        try {
+            result = redisService.get(Constant.WEB_INDEX_BIG_AD_KEY);
+            if (StringUtils.isNotBlank(result)){
+                return result;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         String url = TAOTAO_MANAGER_URL + INDEX_BIG_AD;
         String jsonResult;
@@ -72,10 +88,16 @@ public class IndexService {
         }
 
         try {
-            return MAPPER.writeValueAsString(list);
+            result = MAPPER.writeValueAsString(list);
+            // 保存到redis
+            redisService.set(Constant.WEB_INDEX_BIG_AD_KEY, result,
+                    Constant.WEB_INDEX_BIG_AD_KEY_EXPIRE);
         } catch (JsonProcessingException e) {
             LOGGER.error("解析出错，list=" + list, e);
-            return null;
+        } catch (Exception e2){
+            //捕获redis保存异常
+            LOGGER.error("系统异常", e2);
         }
+        return result;
     }
 }

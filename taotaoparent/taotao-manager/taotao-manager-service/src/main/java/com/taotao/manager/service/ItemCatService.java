@@ -1,14 +1,17 @@
 package com.taotao.manager.service;
 
-import com.github.abel533.mapper.Mapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taotao.common.bean.Constant;
 import com.taotao.common.bean.ItemCatData;
 import com.taotao.common.bean.ItemCatResult;
-import com.taotao.manager.mapper.ItemCatMapper;
-import com.taotao.manager.pojo.BasePojo;
+import com.taotao.common.service.RedisService;
 import com.taotao.manager.pojo.ItemCat;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +31,11 @@ public class ItemCatService extends BaseService<ItemCat>{
         return itemCatMapper;
     }*/
 
+    @Autowired
+    private RedisService redisService;
+
+    private final static  ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
     public List<ItemCat> queryItemCatList(Long parentId) {
         ItemCat itemCat = new ItemCat();
         itemCat.setParentId(parentId);
@@ -40,6 +48,16 @@ public class ItemCatService extends BaseService<ItemCat>{
      */
     public ItemCatResult queryItemCatWebAll() {
         ItemCatResult result = new ItemCatResult();
+
+        try {
+            String redisResult = redisService.get(Constant.WEB_ITEM_CAT_REDIS_KEY);
+            if (StringUtils.isNotBlank(redisResult)){
+                result = OBJECT_MAPPER.readValue(redisResult, ItemCatResult.class);
+                return result;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // 查询全部类目
         List<ItemCat> cats = super.queryList(null);
@@ -92,6 +110,19 @@ public class ItemCatService extends BaseService<ItemCat>{
                 break;
             }
         }
+
+        // 将result 数据保存到redis
+        try {
+            String valueAsString = OBJECT_MAPPER.writeValueAsString(result);
+            redisService.set(Constant.WEB_ITEM_CAT_REDIS_KEY, valueAsString,
+                    Constant.WEB_ITEM_CAT_REDIS_KEY_EXPIRE);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        } catch (Exception e2){
+            // 捕获保存redis异常
+            e2.printStackTrace();
+        }
+
         return result;
     }
 }

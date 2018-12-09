@@ -1,7 +1,9 @@
 package com.taotao.manager.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.taotao.common.bean.Constant;
 import com.taotao.common.bean.EasyUIResult;
+import com.taotao.common.service.RedisService;
 import com.taotao.manager.pojo.Content;
 import com.taotao.manager.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author zjj
@@ -27,6 +28,9 @@ public class ContentController {
 
     @Autowired
     private ContentService contentService;
+
+    @Autowired
+    private RedisService redisService;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
@@ -46,6 +50,7 @@ public class ContentController {
 
         int result = contentService.save(content);
         if (result == 1){
+            delCache();
             return ResponseEntity.ok().build();
         }
 
@@ -59,6 +64,7 @@ public class ContentController {
         int result = contentService.updateSelective(content);
 
         if (result == 1){
+            delCache();
             return ResponseEntity.ok().build();
         }
 
@@ -70,9 +76,21 @@ public class ContentController {
         int result = contentService.deletedByIds(ids);
 
         if (result == ids.length){
+            delCache();
             return ResponseEntity.ok().build();
         }
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+
+    /**
+     * 删除redis缓存的大广告信息
+     */
+    private void delCache(){
+        try {
+            redisService.del(Constant.WEB_INDEX_BIG_AD_KEY);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
