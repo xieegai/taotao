@@ -1,17 +1,20 @@
 package com.taotao.manager.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.taotao.common.bean.EasyUIResult;
 import com.taotao.manager.pojo.ItemParam;
 import com.taotao.manager.service.ItemParemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zjj
@@ -23,6 +26,20 @@ public class ItemParamController {
 
     @Autowired
     private ItemParemService itemParemService;
+
+    @ResponseBody
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public ResponseEntity<EasyUIResult> queryList(@RequestParam("page") Integer page,
+                                  @RequestParam("rows") Integer rows){
+        PageHelper.startPage(page, rows);
+
+        List<ItemParam> itemParams = itemParemService.queryList(null);
+
+        PageInfo pageInfo = new PageInfo(itemParams);
+
+        return ResponseEntity.ok(new EasyUIResult(pageInfo.getTotal(), pageInfo.getList()));
+    }
+
 
     /**
      * 根据商品类目Id查询模板
@@ -68,6 +85,20 @@ public class ItemParamController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public ResponseEntity<Map<String, Object>> delete(@RequestParam("ids") Long[] ids){
+        int result = itemParemService.deletedByIds(ids);
+
+        if (result == ids.length){
+            Map<String, Object> map = new HashMap<>();
+            map.put("statusCode", 200);
+            return ResponseEntity.ok().body(map);
+        }
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
 
 }

@@ -55,7 +55,7 @@ public class IndexService {
                 return result;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("从redis获取数据失败",e);
         }
 
         String url = TAOTAO_MANAGER_URL + INDEX_BIG_AD;
@@ -68,7 +68,7 @@ public class IndexService {
             return null;
         }
 
-        EasyUIResult easyUIResult = EasyUIResult.formetToList(jsonResult, Content.class);
+        EasyUIResult easyUIResult = EasyUIResult.formatToList(jsonResult, Content.class);
         List<Content> contents = (List<Content>) easyUIResult.getRows();
 
         // 便利集合，封装数据结构

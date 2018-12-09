@@ -42,7 +42,6 @@ public class ContentController {
         return ResponseEntity.ok(result);
     }
 
-    @ResponseBody
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> addContent(Content content){
         content.setCreated(new Date());

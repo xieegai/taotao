@@ -16,25 +16,24 @@ public class EasyUIResult {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-
-    private Long tatal;
+    private Long total;
 
     private List<?> rows;
 
     public EasyUIResult() {
     }
 
-    public EasyUIResult(Long tatal, List<?> rows) {
-        this.tatal = tatal;
+    public EasyUIResult(Long total, List<?> rows) {
+        this.total = total;
         this.rows = rows;
     }
 
-    public Long getTatal() {
-        return tatal;
+    public Long getTotal() {
+        return total;
     }
 
-    public void setTatal(Long tatal) {
-        this.tatal = tatal;
+    public void setTotal(Long total) {
+        this.total = total;
     }
 
     public List<?> getRows() {
@@ -45,8 +44,7 @@ public class EasyUIResult {
         this.rows = rows;
     }
 
-    public static EasyUIResult formetToList(String jsonData, Class<?> clazz){
-
+    public static EasyUIResult formatToList(String jsonData, Class<?> clazz){
         try {
             JsonNode jsonNode = MAPPER.readTree(jsonData);
             JsonNode data = jsonNode.get("rows");
@@ -59,7 +57,7 @@ public class EasyUIResult {
                 list = MAPPER.readValue(jsonParser, collectionType);
             }
 
-            return new EasyUIResult(jsonNode.get("tatal").longValue(), list);
+            return new EasyUIResult(jsonNode.get("total").longValue(), list);
         } catch (IOException e) {
             e.printStackTrace();
         }
